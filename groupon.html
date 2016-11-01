@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html style="" class=" js flexbox flexboxlegacy no-touch rgba hsla multiplebgs borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions generatedcontent svg inlinesvg svgclippaths" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I-Tier: Dismantling the Monolith |  - Groupon Engineering Blog</title>
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+  <link rel="pingback" href="https://engineering.groupon.com/xmlrpc.php">
+
+  <meta name="author" content="Groupon">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-57x57-acdf18dd5d.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-60x60-1d1e09e21c.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-72x72-c56c16d9c8.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-76x76-1a0c0db0b4.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-114x114-05df118789.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-120x120-cf279c0fd5.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-144x144-19f4dbc577.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-152x152-ae48ec8610.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/apple-touch-icon-180x180-d50543d26e.png">
+  <link rel="icon" type="image/png" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/favicon-32x32-eebe5ec88f.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/favicon-194x194-8e9d4afb5a.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/favicon-96x96-70016e7df0.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/android-chrome-192x192-5722335cf1.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/favicon-16x16-b6bdcfb0bb.png" sizes="16x16">
+  <link rel="shortcut icon" href="https://engineering.groupon.com/wp-content/themes/groupon_engineering/images/favicon-92bf4a3916.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="Groupon Engineering Blog » Feed" href="https://engineering.groupon.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Groupon Engineering Blog » Comments Feed" href="https://engineering.groupon.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Groupon Engineering Blog » I-Tier: Dismantling the Monolith Comments Feed" href="https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/feed/">
+		<script src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/ga.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/engineering.groupon.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.2"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/wp-emoji-release.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="TheStyleSheets-css" href="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/style_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="icon_font_style-css" href="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/icon-font.css" type="text/css" media="screen">
+<link rel="stylesheet" id="gig_style-css" href="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/gig.css" type="text/css" media="screen">
+<link rel="stylesheet" id="groupon_style-css" href="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme_style-css" href="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/ge.css" type="text/css" media="screen">
+<script type="text/javascript" src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/jquery.js"></script>
+<script type="text/javascript" src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/modernizr-2.js"></script>
+<link rel="https://api.w.org/" href="https://engineering.groupon.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://engineering.groupon.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://engineering.groupon.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Groupon Sponsors Node Knockout 2013!" href="https://engineering.groupon.com/2013/misc/groupon-sponsors-node-knockout-2013/">
+<link rel="next" title="Node Summit 2013" href="https://engineering.groupon.com/2013/misc/node-summit-2013/">
+<meta name="generator" content="WordPress 4.5.2">
+<link rel="canonical" href="https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/">
+<link rel="shortlink" href="https://engineering.groupon.com/?p=1551">
+<link rel="alternate" type="application/json+oembed" href="https://engineering.groupon.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fengineering.groupon.com%2F2013%2Fmisc%2Fi-tier-dismantling-the-monoliths%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://engineering.groupon.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fengineering.groupon.com%2F2013%2Fmisc%2Fi-tier-dismantling-the-monoliths%2F&amp;format=xml">
+
+<!--Plugin WP Missed Schedule 2011.0920.2011 Active--><!-- IE9 Pinned Site Support -->
+<meta name="application-name" content="Groupon Engineering Blog">
+<meta name="msapplication-tooltip" content="Groupon technology documented">
+<meta name="msapplication-starturl" content="https://engineering.groupon.com">
+
+<!-- Facebook Share Info -->
+<meta property="og:url" content="https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/">
+<meta property="og:title" content="I-Tier: Dismantling the Monolith">
+<meta property="og:description" content="We recently completed a year-long project to migrate Groupon’s U.S. web traffic from a monolithic Ruby on Rails application to a new Node.js stack with substantial results. Groupon’s entire U.S. web frontend has been a single Rails codebase from its inception. The frontend codebase quickly grew large, which made it difficult to maintain and challenging... Read More">
+
+	<meta property="og:image" content="https://engineering.groupon.com/wp-content/images/logo_engineering.png">
+
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+
+<body class="prom-night responsive">
+<div id="page" class="hfeed site">
+  <header class="header">
+    <div class="row">
+      <div class="twelve columns">
+                <a href="https://engineering.groupon.com/" title="Groupon" class="logo icon-groupon"><span>Engineering</span></a>
+        <a href="https://www.groupon.com/" class="back">Back to Groupon</a>
+      </div>
+    </div>
+  </header>
+
+  
+    <nav class="primary-nav press-site" role="navigation">
+    <div class="row">
+      <div class="twelve columns">
+        <ul id="menu-dropdown-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29"><a href="http://www.groupon.com/techjobs">Engineering Jobs</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30"><a href="http://www.github.com/groupon">GitHub</a></li>
+</ul>      </div>
+    </div>
+  </nav>
+  
+  <section class="main">
+
+  <div id="primary" class="content-area row">
+    <div id="sidebar" role="sidebar">
+    <aside class="three columns push-nine">
+        <div id="groupon_bio_widget-3" class="widget widget_groupon_bio_widget"><div class="info-photo">
+<a href="https://engineering.groupon.com/"><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/logo_engineering-2.png" alt="Groupon Engineering Blog"></a>
+</div>
+
+<div class="info-description">Groupon technology.  Documented.</div>
+</div><div id="search-3" class="widget widget_search"><form class="search-form" role="search" method="get" id="searchform" action="https://engineering.groupon.com/">
+
+  <input class="search" name="s" id="s" placeholder="Search" type="search">
+</form>
+</div>		<div id="recent-posts-3" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-ghc-alicia/">Groupon @ GHC: Alicia K.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/women-in-engineering-what-we-really-need/">Women in Engineering: What we really need.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-ghc-aparna/">Groupon @ GHC: Aparna B.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-ush/">Groupon @ GHC: Ush C.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-ghc-hillary/">Groupon @ GHC: Hillary P.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-steve/">Groupon @ GHC: Steve M.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-pallavi/">Groupon @ GHC: Pallavi K.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-ghc-emily/">Groupon @ GHC: Emily R.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-sharon/">Groupon @ GHC: Sharon D.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-pedro/">Groupon @ GHC: Pedro F.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-ghc-pratyusha/">Groupon @ GHC: Pratyusha J</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-alan/">Groupon @ GHC: Alan D.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-ghc-mariko/">Groupon @ GHC: Mariko W.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/groupon-at-ghc-shilpa/">Groupon @ GHC: Shilpa S.</a>
+						</li>
+					<li>
+				<a href="https://engineering.groupon.com/2016/events/the-grace-hopper-celebration-is-coming/">The Grace Hopper Celebration is coming!</a>
+						</li>
+				</ul>
+		</div>		    </aside>
+</div>    <main id="main" class="site-main nine columns pull-three" role="main">
+
+      
+        
+<article id="post-1551" class="post-1551 post type-post status-publish format-standard hentry category-misc">
+  <header class="entry-header">
+    <h2><a href="https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/">I-Tier: Dismantling the Monolith</a></h2>
+
+    <div class="metatags">
+      <div class="img-author">
+        <img alt="" src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/3e2d19b84af3af5d15273f91b1e34c9c.jpg" srcset="https://secure.gravatar.com/avatar/3e2d19b84af3af5d15273f91b1e34c9c?s=80&amp;d=https%3A%2F%2Fblogs.groupon.com%2Fengineering%2Fwp-content%2Fthemes%2Fmaster_02%2Fimages%2Fgrouponguy.jpg&amp;r=g 2x" class="avatar avatar-40 photo" width="40" height="40">      </div>
+
+      <div class="metatags-content">
+        <div class="author">
+          By <a href="https://engineering.groupon.com/author/ageitgey/" title="Posts by Adam Geitgey" rel="author">Adam Geitgey</a>        </div>
+        <div class="date-time">at October 30th, 2013</div>
+      </div>
+
+      <div class="social-buttons">
+        <a class="icon-facebook" href="https://www.facebook.com/sharer.php?u=https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/&amp;t=I-Tier:%20Dismantling%20the%20Monolith"></a>
+        <a class="icon-twitter" href="http://twitter.com/?status=I-Tier:%20Dismantling%20the%20Monolith+https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/"></a>
+        <a class="icon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/&amp;title=I-Tier:%20Dismantling%20the%20Monolith&amp;summary=Check+back+daily+for+more+updates.&amp;source=Groupon+Engineering+Blog"></a>
+      </div>
+    </div>
+  </header>
+
+      <div class="entry-content">
+      <p>We <a href="https://engineering.groupon.com/2013/node-js/geekon-i-tier/" title="Geekon: I-Tier" target="_blank">recently completed</a>
+ a year-long project to migrate Groupon’s U.S. web traffic from a 
+monolithic Ruby on Rails application to a new Node.js stack with 
+substantial results.</p>
+<p>Groupon’s entire U.S. web frontend has been a single Rails codebase 
+from its inception.  The frontend codebase quickly grew large, which 
+made it difficult to maintain and challenging to ship new features.  As a
+ solution to this gigantic monolith, we decided to re-architect the 
+frontend by splitting it into small, independent and more manageable 
+pieces.  At the center of this project, we rebuilt each major section of
+ the website as an independent Node.js application. We also rebuilt the 
+infrastructure to make all the independent apps work together.  
+Interaction Tier (I-Tier) was the result.</p>
+<p>Some of the highlights of this great architecture migration include the following:</p>
+<ul>
+<li>Page loads are significantly faster across the site</li>
+<li>Our development teams can develop and ship features faster and with fewer dependencies on other teams</li>
+<li>We can eliminate redundant implementations of the same features in different countries where Groupon is available</li>
+</ul>
+<p>This post is the first in a series about how we re-architected the 
+site and the great benefits we’re seeing that will be key to driving 
+Groupon business forward.  Read on for the full story.</p>
+<p><span id="more-1551"></span></p>
+<p><strong>A Little History</strong></p>
+<p>Groupon started as a single web page that showed one deal each day to
+ people in Chicago.  An example of a typical deal might be something 
+like a discount to a local restaurant or a ticket to a local event.  
+Each deal had a “tipping point” – the minimum number of people that had 
+to buy the deal for it to be valid.  If enough people bought the deal 
+reaching the tipping point, everyone got the discount.  Otherwise, no 
+one got the discount.</p>
+<p>The site was originally built as a Ruby on Rails application.  Rails 
+was a great choice in the beginning as it was one of the easiest ways 
+for the very small development team we had to get our site up and 
+running quickly.  It was also easy to implement new features on Rails; 
+this was a huge asset for us in the early days as the feature set was 
+constantly evolving.</p>
+<p>The original Rails architecture was very simple:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch.png" alt="Architecture" class="aligncenter size-full wp-image-1560" width="179" height="265"></p>
+<p>However, we quickly outgrew being able to serve all of our traffic 
+through a single Rails application pointing to a single database 
+cluster.  We added more frontend servers and database replicas and put 
+everything behind a CDN, but that only worked only until the database 
+writes became a bottleneck.  Processing orders caused a number of 
+database writes; as a result, we decided to move that code out of our 
+Rails app and into a new service with its own database cluster.</p>
+<p>We kept with following this pattern of breaking out existing backend 
+functionality into new services, but the rest of the website (views, 
+controllers, assets, etc) remained part of the original Rails 
+application:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch2.png" alt="Architecture" class="aligncenter size-full wp-image-1562" width="338" height="395"></p>
+<p>This architecture change bought us time but we knew it would only be 
+temporary.  The codebase was still manageable for the small development 
+team we had at that time and it allowed for us to keep the site from 
+falling over during peak traffic.</p>
+<p><strong>Going Global</strong></p>
+<p>Around this time, Groupon began expanding internationally.  Over a 
+short period, we went from operating just in the U.S. to expanded 
+operations in 48 different countries.  Along the way, we also acquired 
+several international companies such as <a href="http://dealbook.nytimes.com/2010/05/18/groupon-makes-a-deal-for-citydeal/?_r=0" title="CityDeal" target="_blank">CityDeal</a>.  Each acquisition came with its own pre-existing software stack.</p>
+<p>The CityDeal architecture was similar to Groupon architecture, but it
+ was a totally separate implementation built by a different team.  As a 
+result there were differences in design and technology—Java instead of 
+Ruby, Apache instead of nginx, PostgreSQL instead of MySQL.</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch3b.png" alt="arch3b" class="aligncenter size-full wp-image-1570" width="629" height="401"></p>
+<p>As we see with fast-growing companies, we had to choose between 
+slowing down to integrate the different stacks or keep both systems, 
+knowing that we were taking on technical debt we would have to repay 
+later.  We made an intentional decision to keep the U.S. and European 
+implementations separate at first in exchange for growing the business 
+faster.  And as more acquisitions followed, more complexity was added to
+ the architecture.</p>
+<p><strong>Mobile</strong></p>
+<p>We also built mobile clients for iPhone, iPad, Android and Windows 
+Mobile; we definitely did not want to build a different mobile app for 
+each country where Groupon operated.  Instead, we decided to build an 
+API layer on top of each of our backend software platforms; our mobile 
+clients connected to whichever API endpoint matched the user’s country:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch4.png" alt="Architecture" class="aligncenter size-full wp-image-1572" srcset="https://engineering.groupon.com/files/2013/10/arch4.png 622w, https://engineering.groupon.com/files/2013/10/arch4-460x300.png 460w" sizes="(max-width: 622px) 100vw, 622px" width="622" height="404"></p>
+<p>This worked well for our mobile team. They were able to build a single mobile app that worked across all of our countries.</p>
+<p>But there was still a catch. Whenever we built a new product or 
+feature, we built it first for the web and then later built an API so 
+that the feature could be implemented on mobile.  We were repeating our 
+efforts.</p>
+<p>Now that <a href="https://engineering.groupon.com/2013/misc/mobile-first-lessons-learned/" title="Mobile First: Lessons Learned" target="_blank">nearly half of our business is mobile</a>
+ in the U.S., we need to build with a mindset of mobile first.  
+Accordingly, we want an architecture where a single backend could serve 
+mobile and web clients with minimal development effort.</p>
+<p><strong>Multiple Monoliths</strong></p>
+<p>As Groupon continued to evolve and new products were launched, the 
+frontend Ruby codebase grew larger.  There were too many developers 
+working in the same codebase.  It got to the point where it was 
+difficult for developers to run the application locally. Test suites 
+slowed down  and flakey tests became a real problem. And since it was a 
+single codebase, the entire application had to be deployed at once.  
+When a production issue required a rollback, everyone’s changes would 
+get rolled back instead of just the broken feature.  In short, we had 
+all the problems of a monolithic codebase that had grown too large.</p>
+<p>But we had this problem multiple times over.  Not only did we have to
+ deal with the U.S. codebase, but we had many of the same problems with 
+the European codebase.  We needed to totally re-architect the frontend.</p>
+<p><strong>Rewrite Everything!</strong></p>
+<p>Rebuilding the entire frontend is a risky endeavor.  It takes a lot 
+of time involving a lot of different people and there’s a real chance 
+that you won’t come up with anything that’s any better than the old 
+system.  Or worse — it takes too long and you give up halfway through 
+with no results to show for the effort.</p>
+<p>But we had great success in the past rearchitecting smaller pieces of our infrastructure.  For example, both our <a href="http://touch.groupon.com/" title="Groupon" target="_blank">mobile website</a> and our <a href="https://www.grouponworks.com/merchant-resources/merchant-center" title="Merchant Center" target="_blank">merchant-facing website</a>
+ had been rebuilt with great results.  This experience gave us a good 
+starting point and from it we set out clear goals for this project.</p>
+<p><strong>Goal 1: Unify our frontends</strong></p>
+<p>With multiple software stacks implementing the same features in 
+different countries, we weren’t able to move as fast as we wanted.  We 
+needed to eliminate redundancy in our software stack.</p>
+<p><strong>Goal 2: Put mobile on the same level as web</strong></p>
+<p>Since nearly half of our business in the U.S. is mobile, we couldn’t 
+afford to build a web version and a mobile version.  We needed an 
+architecture where web was just another client using the same APIs as 
+our mobile apps.</p>
+<p><strong>Goal 3: Make the site faster</strong></p>
+<p>Our site was slower than we wanted. In the rush to handle the growth 
+of the site, the U.S. frontend had accumulated tech debt which made it 
+challenging to optimize.  We wanted a solution that didn’t require so 
+much code to serve a request.  We wanted something <a href="http://www.infoq.com/presentations/Simple-Made-Easy" title="Simple Made Easy" target="_blank">simple</a>.</p>
+<p><strong>Goal 4: Let teams move independently</strong></p>
+<p>When Groupon was first launched, the site was indeed simple.  But 
+since then, we’ve added many new product lines with supported 
+development teams located around the world.  We wanted each team to be 
+able to build and deploy their features independently and quickly.  We 
+needed to break the interdependency between product teams that existed 
+because everything was in a single codebase.</p>
+<p><strong>Approach</strong></p>
+<p>First, we decided to split each major feature of the website into a separate web application:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch52.png" alt="Architecture" class="aligncenter size-full wp-image-1577" width="574" height="139"></p>
+<p>We built a web application framework in Node.js that included common 
+features needed by each application to make it easy for our teams to 
+build out these individual web apps.</p>
+<p><strong>Sidebar: Why Node.js?</strong></p>
+<p>Before building our new frontend layer, we evaluated several 
+different software stacks to see which would be the best fit for us.</p>
+<p>We were looking for a solution to a very specific problem – 
+efficiently handling many incoming HTTP requests, making parallel API 
+requests to service each of those HTTP requests, and rendering the 
+results into HTML.  We also wanted something that we could confidently 
+monitor, deploy and support.</p>
+<p>We wrote prototypes using several software stacks and tested them.  
+We’ll post a more detailed follow-up with the specifics, but overall we 
+found Node.js to be a good fit for this very specific problem.</p>
+<p><strong>Approach, continued…</strong></p>
+<p>Next, we added a routing layer on top that forwarded users to the appropriate application based on the page they were visiting:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch6.png" alt="Architecture" class="aligncenter size-full wp-image-1580" width="350" height="131"></p>
+<p>We built the Groupon routing service (which we call Grout) as an 
+nginx module.  It allows us to do lots of cool things like conduct A/B 
+tests between different implementations of the same app on different 
+servers.</p>
+<p>And to make all of these independent web apps work smoothly together,
+ we’ve built separate services for sharing layouts and style, 
+maintaining shared configuration and managing A/B test treatments.  
+We’ll post more details on these services in the future.</p>
+<p>All of this sits in front of our API and nothing in the frontend 
+layer is allowed to talk to a database or backend service directly.  
+This allows us to build a single federated API layer that serves both 
+our web and mobile apps:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch7a.png" alt="Architecture" class="aligncenter size-full wp-image-1581" width="483" height="609"></p>
+<p>We are working on unifying our backend systems, but for the short 
+term we still need to support our U.S. and European backends.  So we 
+designed our frontend to work for both backends at the same time:</p>
+<p><img src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/arch9b.png" alt="Architecture" class="aligncenter size-full wp-image-1583" width="639" height="515"></p>
+<p><strong>Results</strong></p>
+<p>We’ve just finished migrating our U.S. frontend from Ruby to our new 
+Node.js infrastructure.  The old monolithic frontend was split up into 
+approximately 20 separate web apps, each of which was a clean rewrite.  
+We’re currently serving 50k rpm off of these servers on an average day, 
+but we expect multiples of that traffic during the holiday season.  And 
+that number will increase greatly as we migrate over traffic from our 
+other 48 countries.</p>
+<p>These are the benefits we’ve seen so far:</p>
+<ul>
+<li>Page loads are faster across the board—typically by 50%.  Part of 
+this is due to technology changes and part of this is because we had a 
+chance to rewrite all of our web pages to be much slimmer.  And we still
+ expect to make significant gains here as we roll out additional 
+changes.</li>
+<li>We’re serving the same amount of traffic with less hardware compared to the old stack.</li>
+<li>Teams are able to deploy changes to their applications independently.</li>
+<li>We’ve been able to make site-wide feature and design changes much 
+more quickly than we would have been able to with our old architecture.</li>
+</ul>
+<p>Overall, this migration has made it possible for our development 
+teams to ship pages more quickly with fewer interdependencies and 
+removed some of the performance limitations of our old platform.  But we
+ have many more improvements planned for the future and we’ll be posting
+ details soon.</p>
+          </div><!-- .entry-content -->
+  
+  <footer class="post-metatags-footer">
+          <div class="categories-and-tags">
+        <p> No Tags </p>        <a class="top" href="#"><span class="icon-arrow-pointer-up"></span></a>
+      </div>
+      </footer>
+</article>
+<hr>
+              <div class="comments">
+          
+<div id="comments" class="comments-area">
+
+      <h2 class="comments-title">
+      59 thoughts on “<span>I-Tier: Dismantling the Monolith</span>”    </h2>
+
+    <ol><!-- List Comments @TODO Rework with wp_list_comments and custom Comment Walker Class -->
+            <li id="comment-8310">
+                <p>Nice work Adam, Sean, Todd, Jan, Tristan and the whole itier team. Congrats.</p>
+        <cite> by Par Trivedi on October 30, 2013 at 2:11 pm</cite>
+      </li>
+            <li id="comment-8313">
+                <p><b>A very interesting read!</b>
+
+It appears that the re-architecture is pretty much the same as whats 
+happening to most web apps these days, looks like your standard SoA 
+(Service Oriented Architecture). i.e. mostly centralised web service API
+ that serve multilple different client platforms (mobile, desktop, etc)
+
+One thing that I didn't see in the write up is any caching layer? or is 
+that done semi-automatically via nginx routing?
+
+If you are using caching, what is your caching policy and where is that 
+controlled?
+
+Not to sure about the use of node.js. as the bottle necks will always be
+ the database (IMHO) one way or another.</p>
+        <cite> by <a href="http://www.codingninja.co.uk/" rel="external nofollow" class="url">Coding Ninja</a> on October 30, 2013 at 3:08 pm</cite>
+      </li>
+            <li id="comment-8320">
+                <p>Impressive work, and I can't wait for the follow-up. 
+As a rails developer myself, I wonder, what would you have done 
+differently with your initial single-app architecture that would have 
+made breaking it up like this easier?</p>
+        <cite> by <a href="http://www.stevegrossi.com/" rel="external nofollow" class="url">Steve</a> on October 30, 2013 at 4:56 pm</cite>
+      </li>
+            <li id="comment-8322">
+                <p>Adam,
+I'm impressed at the work that went into this. Working with multiple 
+technology stacks and trying to avoid frankenstein software is very 
+challenging.</p>
+        <cite> by <a href="http://www.p0z3r.org/" rel="external nofollow" class="url">Ryan Nickell</a> on October 30, 2013 at 6:08 pm</cite>
+      </li>
+            <li id="comment-8329">
+                <p>In general the single app architecture is the 
+problem, not the language/runtime/web framework. I'm sure there are ways
+ that we could have improved the monolith, but having apps with limited 
+responsibility gave us more value. We could have used Rails to get to 
+this new architecture, but we felt Node with our home-grown application 
+stack gave us more flexibility.</p>
+        <cite> by Sean McCullough on October 30, 2013 at 8:34 pm</cite>
+      </li>
+            <li id="comment-8330">
+                <p>We have caching at various levels in our 
+infrastructure, from in-app data caching to service response caching, 
+but due to the heavily dynamic nature of our pages doing page-level 
+caching wasn't useful.</p>
+        <cite> by Sean McCullough on October 30, 2013 at 8:35 pm</cite>
+      </li>
+            <li id="comment-8333">
+                <p>I'm curious on "API Client Library", is it a browser javascript framework that directly talk to api?
+Or is it a server side library that make http or whatever call to api?</p>
+        <cite> by Kieve Chua on October 30, 2013 at 9:06 pm</cite>
+      </li>
+            <li id="comment-8335">
+                <p>What languages/frameworks/platforms are you using for Backend Services?</p>
+        <cite> by Jorge on October 30, 2013 at 10:40 pm</cite>
+      </li>
+            <li id="comment-8339">
+                <p>It's a server-side library, but client-side 
+communication is possible too via other means when needed.  To keep the 
+diagrams from becoming too complex, I just tried to point out major 
+pieces.</p>
+        <cite> by Adam Geitgey on October 30, 2013 at 11:10 pm</cite>
+      </li>
+            <li id="comment-8340">
+                <p>Java and ruby are the most commonly used technologies
+ in our backend systems, but we also have a good mix of other 
+technologies in use in various systems like clojure, python, etc.</p>
+        <cite> by Adam Geitgey on October 30, 2013 at 11:15 pm</cite>
+      </li>
+            <li id="comment-8343">
+                <p>Very nice! Congrats!
+
+I am curious about configuration management. 20 web apps is not a small number.</p>
+        <cite> by Jesse on October 31, 2013 at 1:19 am</cite>
+      </li>
+            <li id="comment-8351">
+                <p>Hi! Did you look on EvenMachine + Fibers? Does't it look more simple with similar efficiency?</p>
+        <cite> by Peter on October 31, 2013 at 5:23 am</cite>
+      </li>
+            <li id="comment-8358">
+                <p>Very Impressive note on past and the approach taken. 
+
+Isn't the database layer another bottle neck. with two different data 
+centers taking in data through two different code, how difficult is that
+ to combine?
+
+Is it left intentionally? what are all the possible breaks that were 
+thought through which stopped from getting your hands on Database??
+
+How Friendly would be NoSQL for certain type of data that you were 
+handling that are being thought through?</p>
+        <cite> by Ananth on October 31, 2013 at 8:49 am</cite>
+      </li>
+            <li id="comment-8359">
+                <p>I'd like to see more benefits of node to mention such
+ as coffeescript, one language for frontend and backend, async, client 
+side mvc etc.</p>
+        <cite> by Peking2 on October 31, 2013 at 9:29 am</cite>
+      </li>
+            <li id="comment-8360">
+                <p>I compared EM with node, EM is a little frustrating 
+and node just works. I did some research and found many people tried EM 
+first but ended up with node.</p>
+        <cite> by Peking2 on October 31, 2013 at 9:32 am</cite>
+      </li>
+            <li id="comment-8361">
+                <p>How about scala?</p>
+        <cite> by Peking2 on October 31, 2013 at 9:34 am</cite>
+      </li>
+            <li id="comment-8363">
+                <p>We did evaluate using Sinatra with EM, and the 
+performance was similar. The third party module support wasn't great, 
+and we felt that fibers aren't a great way to express concurrency.</p>
+        <cite> by Sean McCullough on October 31, 2013 at 10:25 am</cite>
+      </li>
+            <li id="comment-8364">
+                <p>I'm working on another post to dive into more of the 
+technical details of using Node and the challenges of ramping an 
+engineering team up onto a new stack. Stay tuned!</p>
+        <cite> by Sean McCullough on October 31, 2013 at 10:27 am</cite>
+      </li>
+            <li id="comment-8365">
+                <p>We have other teams working on combining the backend 
+systems as a separate project.  
+
+The diagrams here are a very high-level approximation of the backend 
+just to give you an idea of the flow of data.  There's a lot of 
+different pieces in the backend.  Some of those pieces use NoSql 
+databases and some don't.</p>
+        <cite> by Adam Geitgey on October 31, 2013 at 10:33 am</cite>
+      </li>
+            <li id="comment-8366">
+                <p>That's a great point!  Configuration management 
+becomes critical in this kind of architecture.  We are building a 
+solution that we'll cover in a future post.</p>
+        <cite> by Adam Geitgey on October 31, 2013 at 10:35 am</cite>
+      </li>
+            <li id="comment-8374">
+                <p>Thanks for taking the time to explain what this 
+i-Tier we have been hearing about for months is all about. The 
+explanation is understandable even for a non technical audience. Thanks!</p>
+        <cite> by Regis Bectarte on October 31, 2013 at 3:24 pm</cite>
+      </li>
+            <li id="comment-8407">
+                <p>great read - look forward to your followup.  Sean McCullough's inline comments here are gems as well  
+
+ps. love that you linked to 'Simple Made Easy'  :)</p>
+        <cite> by Steve Gentile on November 1, 2013 at 8:36 am</cite>
+      </li>
+            <li id="comment-8414">
+                <p>Does your company develop web mobile or native applications?</p>
+        <cite> by Jimmy on November 1, 2013 at 11:23 am</cite>
+      </li>
+            <li id="comment-8418">
+                <p>Very interesting. We're facing a similar quandary 
+with our monolithic web app. Out of curiosity--why an nginx routing 
+module? Why not simply use node for that as well?</p>
+        <cite> by Ted Jenkins on November 1, 2013 at 3:18 pm</cite>
+      </li>
+            <li id="comment-8429">
+                <p>We already had a lot of logic baked into our nginx 
+config that we needed to maintain through the transition. Adding the 
+routing layer to the existing infrastructure was safer.</p>
+        <cite> by Sean McCullough on November 1, 2013 at 9:08 pm</cite>
+      </li>
+            <li id="comment-8431">
+                <p>So is node rendering everything serverside or just pumping json out to clientside?</p>
+        <cite> by Troy on November 1, 2013 at 9:28 pm</cite>
+      </li>
+            <li id="comment-8458">
+                <p>Thanks a lot for this article. Good to see 
+architecture in action.
+
+I see in your paper that you managed to dismantle your monolithic web 
+front end. But what about the API component ? Is it one component as it 
+appears on your schemas ? One runtime ? One team in charge of it ? Do 
+you put in production versions of your services without stoping the 
+others ? And finally what is the underlying technology for this API ?
+
+Thanks !</p>
+        <cite> by Jan Wit on November 2, 2013 at 7:44 am</cite>
+      </li>
+            <li id="comment-8461">
+                <p>Excellent write up on solving a really tough problem.
+ It seems like a great solution. Diversifying your applications rather 
+than lumping them all together, not to mention drastically improving 
+your page load time. 
+
+Have you noticed any difference or change in customer interaction after 
+the changes? Particularly with a faster website...</p>
+        <cite> by <a href="http://ivanthevariable.co./" rel="external nofollow" class="url">Andrew</a> on November 2, 2013 at 8:01 am</cite>
+      </li>
+            <li id="comment-8511">
+                <p>One of the challenges of breaking single monolithic 
+app into multiple services/tiny web apps, is the set of common Models or
+ SW-CCC (System Wide Cross Cutting Concerns) such as Logs, Stats, 
+Exception reporting, Security (User Model), etc..
+What was the approach taken to share that across the services?</p>
+        <cite> by <a href="http://avner.me/" rel="external nofollow" class="url">Avnerner</a> on November 3, 2013 at 1:27 am</cite>
+      </li>
+            <li id="comment-8527">
+                <p>It's a very nice story about the complex work that sometimes we need resolve!</p>
+        <cite> by <a href="http://deploshark.com.ar/" rel="external nofollow" class="url">Gonzalo</a> on November 3, 2013 at 1:27 pm</cite>
+      </li>
+            <li id="comment-8532">
+                <p>Great article! Looking forward to the next post about
+ the rewrite, especial on what nodejs technologies were used! Were there
+ any downsides that was experienced in this rewrite using node?</p>
+        <cite> by Surge on November 3, 2013 at 4:30 pm</cite>
+      </li>
+            <li id="comment-8544">
+                <p>Using Nginx OpenResty with Lua solved a similar 
+multiple upstreams problem for us. It made the Nginx config really 
+short, plus Lua is likely a lot easier to maintain than a custom Nginx 
+module.</p>
+        <cite> by <a href="http://writebox.co.uk/" rel="external nofollow" class="url">Mark Selby</a> on November 3, 2013 at 10:28 pm</cite>
+      </li>
+            <li id="comment-8552">
+                <p>Nice to see more companies see the value in Node.js, I
+ am hoping that local companies here in the UK take notice, as I am one 
+of a few in Northern Ireland using it in production.  Looking forward to
+ hearing about the specifics on what stack you used.</p>
+        <cite> by Chris Johnson on November 4, 2013 at 5:22 am</cite>
+      </li>
+            <li id="comment-8564">
+                <p>Great article. 
+Would love to know more about config management. 
+When do you plan to post about configs?</p>
+        <cite> by Manasi on November 4, 2013 at 12:33 pm</cite>
+      </li>
+            <li id="comment-8600">
+                <p>We render the pages mostly server-side and enhance them with client-side rendering if the product calls for it.</p>
+        <cite> by Sean McCullough on November 5, 2013 at 9:13 am</cite>
+      </li>
+            <li id="comment-8601">
+                <p>Our Ruby monolith had two facets: web frontend and 
+REST API. The REST API is still there, but we're starting down the road 
+to breaking it up into smaller pieces. Much of the data model has been 
+moved out into smaller services and the API is quickly becoming an 
+aggregation point.</p>
+        <cite> by Sean McCullough on November 5, 2013 at 9:14 am</cite>
+      </li>
+            <li id="comment-8603">
+                <p>Hi - This is great stuff, thanks for the post. One 
+question: within your specialized front end applications, how do you 
+handle duplicate code - especially javascript? 
+
+You mentioned that you built an application framework in Node.js which 
+contains the shared components for each of the web apps. Do you store 
+shared client side components in this same framework to cut down on 
+duplicate implementations of JS assets? 
+
+<em>* Thanks again for the great post. It's great to hear a success 
+story for a large Node application. Makes me want to try it out... </em></p>
+        <cite> by Ron Williams on November 5, 2013 at 9:51 am</cite>
+      </li>
+            <li id="comment-8619">
+                <p>Curious if you looked into Celluloid::IO on the Ruby side. I'm gonna guess no...</p>
+        <cite> by <a href="http://tonyarcieri.com/" rel="external nofollow" class="url">Tony Arcieri</a> on November 5, 2013 at 5:36 pm</cite>
+      </li>
+            <li id="comment-8656">
+                <p>Great article! Looking forward to more detailed discussion of Node.js: the features and the challenges.</p>
+        <cite> by Jim on November 6, 2013 at 12:10 pm</cite>
+      </li>
+            <li id="comment-8658">
+                <p>Thanks for sharing... I am just beginning to consider
+ ways to break apart a large (13 years) Java web app, and start anew. 
+Front-end first, wrapper back-end services, etc.</p>
+        <cite> by <a href="http://technicaldebt.com/" rel="external nofollow" class="url">Jon Kern</a> on November 6, 2013 at 12:40 pm</cite>
+      </li>
+            <li id="comment-8727">
+                <p>What view engine are you using with Node or is it all JSON with client side rendering?</p>
+        <cite> by <a href="http://www.guyellisrocks.com/" rel="external nofollow" class="url">Guy Ellis</a> on November 7, 2013 at 2:07 pm</cite>
+      </li>
+            <li id="comment-8733">
+                <p>Very cool!</p>
+        <cite> by <a href="http://www.highground.com/" rel="external nofollow" class="url">Robert Lawson</a> on November 7, 2013 at 3:46 pm</cite>
+      </li>
+            <li id="comment-8809">
+                <p>The site is certainly faster! As for improved 
+customer engagement, we usually measure that over a longer period of 
+time so it's harder to tell. We do know that our customers do engage 
+with the site better when it's up, and the new architecture makes it 
+easier to keep the site up.</p>
+        <cite> by Sean McCullough on November 8, 2013 at 4:02 pm</cite>
+      </li>
+            <li id="comment-8810">
+                <p>Also the site is faster primarily because we gutted a
+ lot of legacy code paths on our backend and we rewrote all our 
+HTML/CSS/JS to be much slimmer. That in and of itself was a huge win.</p>
+        <cite> by Sean McCullough on November 8, 2013 at 4:03 pm</cite>
+      </li>
+            <li id="comment-8811">
+                <p>We have some solutions in place for managing logs, 
+stats, and exceptions for our current SOA, but they're far from perfect.
+ There are a few platform teams working on building out a solid 
+distributed tracing system to help get a better view of all this. 
+
+Cross cutting business requirements have been handled a few different 
+ways. User authentication is distributed via module to all teams that 
+need that functionality. The Layout Service hosts many web features that
+ are used in all applications. But we've found that it's actually nice 
+not having these big concerns across our website anymore because 
+regressions in these crucial pieces are often difficult to fix (e.g. if 
+you have a before filter where you try to get the active user on every 
+request and for some reason that call gets slow, your entire site gets 
+slow in the same way).</p>
+        <cite> by Sean McCullough on November 8, 2013 at 4:07 pm</cite>
+      </li>
+            <li id="comment-8824">
+                <p>All server side. It's the best fit for our read-heavy
+ limited-step product. 
+
+We're using our own view/rendering pipeline (a fork of 
+https://github.com/quackingduck/bulk-hogan/) and we use mustache for our
+ templating.</p>
+        <cite> by Sean McCullough on November 8, 2013 at 6:05 pm</cite>
+      </li>
+            <li id="comment-10092">
+                <p>Thank you for your post!
+
+I think that it's crazy try to use something based on JavaScript for 
+building ultimate production ready solutions. You wrote that all is 
+cool. Great! But you didn't write anything about problems with new 
+architecture and using node.js. Why?</p>
+        <cite> by Vladimir on November 25, 2013 at 12:45 pm</cite>
+      </li>
+            <li id="comment-10308">
+                <p>How does your Node implementation work with your CDN 
+(Akamai)? What gets cached differently under Node versus your previous 
+RoR implementation?</p>
+        <cite> by Jeffrey Costa on November 26, 2013 at 11:45 am</cite>
+      </li>
+            <li id="comment-10599">
+                <p>Great article :)</p>
+        <cite> by Rajesh on November 28, 2013 at 3:03 am</cite>
+      </li>
+            <li id="comment-16236">
+                <p>I have been browsing the web to find some inspiration
+ to build our next generation web architecture.  This is by far the most
+ useful  post.  Good job
+
+Question 1: Are all your API stateless or some of them statefull and 
+need to keep track of ‘user session’ ?
+
+
+Question 2 : Is there any situation that some code you implemented in 
+your Interaction Thier need to  be re-use for your Mobile App (ie 
+creating a Link between the Mobile and your Interaction layer)?</p>
+        <cite> by hugo villeneuve on February 5, 2014 at 2:01 pm</cite>
+      </li>
+            <li id="comment-16712">
+                <p>Have yours tried to test vert.x framework?</p>
+        <cite> by Y.H. on February 20, 2014 at 12:21 am</cite>
+      </li>
+            <li id="comment-16875">
+                <p>[...] to the same topic. Incidentally, the Groupon 
+team has decided to do something similar when they moved from a 
+monolithic RoR app to a collection of smaller Node.js [...]</p>
+        <cite>pingback by <a href="http://dejanglozic.com/2014/02/24/the-queue-is-the-message/" rel="external nofollow" class="url">The Queue Is the Message | Dejan Glozic</a> on February 24, 2014 at 6:44 am</cite>
+      </li>
+            <li id="comment-32865">
+                <p>[...] from a Ruby on Rails framework to Node.js for 
+their back-end services. Engineer Adam Geitgey elaborated on why they 
+went with [...]</p>
+        <cite>pingback by <a href="http://www.roidna.com/blog/node-js-popularity/" rel="external nofollow" class="url">Node.js Popularity &amp; Usage on High-Profile Sites | ROI DNA</a> on June 26, 2014 at 2:06 pm</cite>
+      </li>
+            <li id="comment-45243">
+                <p>How do you manage stylesheets and design across the site with multiple webapps?</p>
+        <cite> by <a href="http://www.apfritts.com/" rel="external nofollow" class="url">AP Fritts</a> on November 6, 2014 at 12:02 pm</cite>
+      </li>
+            <li id="comment-45867">
+                <p>Hey,
+
+How did you guys manage the data updates and deletes between systems? 
+Lets say you have a item in groupon goods, which has a corresponding in 
+the groupon deals. Now the good has been deleted from that service, but a
+ deal is still lurking around pointing to a non existent good. How do 
+you guys manage this?</p>
+        <cite> by Azhagu Selvan on December 18, 2014 at 1:25 am</cite>
+      </li>
+            <li id="comment-45991">
+                <p>@Azhagu, Adam's post describes our front-end 
+architecture which does not have any data storage. The data storage is 
+abstracted behind our REST APIs. To answer your question though, we 
+generally use asynchronous messaging described in a previous blog post: 
+https://engineering.groupon.com/2013/hornetq/building-a-distributed-messaging-system/</p>
+        <cite> by Kyle O on January 6, 2015 at 11:58 am</cite>
+      </li>
+            <li id="comment-52765">
+                <p>Hi. ¿What is better for you, to have only one 
+front-end interface or to have one front-end interface per country or 
+region?. My concern is about the platform evolution by country or region
+ without impact the other ones. Perhaps sometimes you will need to add 
+some feature in certain country but not necessary in all the countries. 
+Thanks.</p>
+        <cite> by Jorge on August 4, 2015 at 7:04 am</cite>
+      </li>
+            <li id="comment-65485">
+                <p>Jorge, I think the choice of front-end per country or
+ one single front-end depends on your product goals and how your company
+ is structured and how big your business is in each country.
+
+We try to maintain the same front-end for most countries and then 
+disable or enable extra features in configuration for each country. It 
+is more efficient and easier to support that way since there is a single
+ deploy for all countries.
+
+But that strategy may not work if you want wildly different features or 
+UX for different countries. For example, countries in Asia may prefer a 
+totally different UI experience than countries in Europe.
+
+So I think it first is a product design and business question and then 
+you can optimize your implementation plan around that to fit your 
+company's needs.</p>
+        <cite> by <a href="https://www.groupon.com/" rel="external nofollow" class="url">Adam Geitgey</a> on September 14, 2015 at 12:02 pm</cite>
+      </li>
+            <li id="comment-102461">
+                <p>[…] In comparison with earlier Ruby on Rails 
+platform, web pages got faster by about 50% and are able to serve much 
+higher traffic. Groupon states: […]</p>
+        <cite>pingback by <a href="https://brainhub.eu/blog/2016/05/30/9-famous-apps-using-node-js/" rel="external nofollow" class="url">9 Famous Apps Using Node.js | Blog Brainhub.eu</a> on May 30, 2016 at 4:51 am</cite>
+      </li>
+          </ol>
+
+  
+  
+				<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://engineering.groupon.com/2013/misc/i-tier-dismantling-the-monoliths/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://engineering.groupon.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" size="30" maxlength="245" aria-required="true" required="required" type="text"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" size="30" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required" type="text"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" size="30" maxlength="200" type="text"></p>
+<p class="form-submit"><input name="submit" id="submit" class="submit" value="Post Comment" type="submit"> <input name="comment_post_ID" value="1551" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p><p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="e7ed87039d" type="hidden"></p><p style="display: none;"></p>				<input id="ak_js" name="ak_js" value="1477993313358" type="hidden"></form>
+					</div><!-- #respond -->
+		
+</div><!-- #comments -->
+      </div>
+        
+      
+    </main><!-- #main -->
+  </div><!-- #primary -->
+
+</section>
+
+<footer class="footer-sitemap">
+  <div class="row">
+    <div class="five columns">
+            <a href="https://engineering.groupon.com/" title="Groupon" class="logo icon-groupon"><span>Engineering</span></a>
+    </div>
+
+    <div class="seven columns">
+      <ul class="block-grid">
+        	<li class="cat-item cat-item-83"><a href="https://engineering.groupon.com/category/announcements/">Announcements</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="https://engineering.groupon.com/category/backbone-js/">Backbone.js</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="https://engineering.groupon.com/category/big-data/">Big Data</a>
+</li>
+	<li class="cat-item cat-item-149"><a href="https://engineering.groupon.com/category/conferences/">Conferences</a>
+<ul class="children">
+	<li class="cat-item cat-item-273"><a href="https://engineering.groupon.com/category/conferences/grace-hopper-celebration/">Grace Hopper Celebration</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-40"><a href="https://engineering.groupon.com/category/cucumber-2/">Cucumber</a>
+</li>
+	<li class="cat-item cat-item-85"><a href="https://engineering.groupon.com/category/design/">Design</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://engineering.groupon.com/category/events/">Events</a>
+</li>
+	<li class="cat-item cat-item-253"><a href="https://engineering.groupon.com/category/geekfest/">Geekfest</a>
+</li>
+	<li class="cat-item cat-item-111"><a href="https://engineering.groupon.com/category/geekon/">Geekon</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="https://engineering.groupon.com/category/groupinar-speaker-series/">Groupinar Speaker Series</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://engineering.groupon.com/category/hackathons/">Hackathons</a>
+</li>
+	<li class="cat-item cat-item-42"><a href="https://engineering.groupon.com/category/hornetq/">HornetQ</a>
+</li>
+	<li class="cat-item cat-item-155"><a href="https://engineering.groupon.com/category/ios/">iOS</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="https://engineering.groupon.com/category/java/">Java</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://engineering.groupon.com/category/javascript/">JavaScript</a>
+</li>
+	<li class="cat-item cat-item-157"><a href="https://engineering.groupon.com/category/meetup/">meetup</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://engineering.groupon.com/category/misc/">Misc</a>
+</li>
+	<li class="cat-item cat-item-74"><a href="https://engineering.groupon.com/category/mobile-2/">Mobile</a>
+</li>
+	<li class="cat-item cat-item-43"><a href="https://engineering.groupon.com/category/mongodb/">MongoDB</a>
+</li>
+	<li class="cat-item cat-item-41"><a href="https://engineering.groupon.com/category/mysql/">MySQL</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="https://engineering.groupon.com/category/node-js/">Node.js</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://engineering.groupon.com/category/open-source/">Open Source</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="https://engineering.groupon.com/category/personalization/">Personalization</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="https://engineering.groupon.com/category/rails/">Rails</a>
+</li>
+	<li class="cat-item cat-item-75"><a href="https://engineering.groupon.com/category/releases/">Releases</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://engineering.groupon.com/category/ruby/">Ruby</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="https://engineering.groupon.com/category/selenium-2/">Selenium</a>
+</li>
+	<li class="cat-item cat-item-38"><a href="https://engineering.groupon.com/category/software-apprenticeship/">Software Apprenticeship</a>
+</li>
+	<li class="cat-item cat-item-39"><a href="https://engineering.groupon.com/category/testing/">Testing</a>
+</li>
+	<li class="cat-item cat-item-147"><a href="https://engineering.groupon.com/category/women-in-tech/">Women in Tech</a>
+</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</div><!-- #page -->
+
+
+<!--Plugin WP Missed Schedule 2011.0920.2011 Active--><!-- Modernizr Google Analytics loader -->
+<script>
+	window._gaq = [['_setAccount','UA-26968040-8'],['_trackPageview'],['_trackPageLoadTime']];
+	Modernizr.load({
+		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+	});
+</script>
+<script type="text/javascript" src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/form.js"></script>
+<script type="text/javascript" src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/comment-reply.js"></script>
+<script type="text/javascript" src="I-Tier%20%20Dismantling%20the%20Monolith%20_%20-%20Groupon%20Engineering%20Blog_files/wp-embed.js"></script>
+
+
+
+</body></html>
